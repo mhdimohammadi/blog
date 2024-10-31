@@ -1,0 +1,10 @@
+{% extends 'parent/base.html' %}
+{% block title %}account details{% endblock %}
+{% block content %}
+
+    {% for comment in comments %}
+        <p>{{ comment.post }}</p>
+        <br>
+    {% endfor %}
+
+{% endblock %}

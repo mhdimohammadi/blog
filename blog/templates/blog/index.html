@@ -1,0 +1,22 @@
+{% extends 'parent/base.html' %}
+{% block title %}{% endblock %}
+{% load blog_tags %}
+{% block content %}
+    <h2>آمار</h2>
+    <p>{% total_posts %}تعداد پست:</p>
+    <p>{% total_comments %}تعداد کامنت:</p>
+    <p>{% last_post_date %}تاریخ اخرین پست:</p>
+    <h2>محبوب ترین پست ها</h2>
+    {% most_popular_posts as pop_posts %}
+    {% for post in pop_posts %}
+        <a href="{{ post.get_absolute_url }}">{{ post.title }} with {{ post.comment_count }} comment</a>
+        <br>
+    {% endfor %}
+    {% mart %}
+    <br>
+    {% mirt %}
+    <br>
+    most active user: {% mau %}
+    <br>
+    <a href="{% random_post %}">پست پیشنهادی</a>
+{% endblock %}

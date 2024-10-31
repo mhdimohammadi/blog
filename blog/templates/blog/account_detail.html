@@ -1,0 +1,18 @@
+{% extends 'parent/base.html' %}
+{% block title %}account details{% endblock %}
+{% block content %}
+   <img src="{{ account.photo.url }}" alt="picture didnt load">
+   <br>
+    {{ account.user.username }}
+    <br>
+    {{ account.user.first_name }}
+    <br>
+    {{ account.user.last_name }}
+    <br>
+    {{ account.date_of_birth }}
+    <br>
+    {{ account.bio }}
+    <br>
+    {{ account.job }}
+    <br>
+{% endblock %}

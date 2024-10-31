@@ -1,0 +1,37 @@
+{% extends 'parent/base.html' %}
+{% load jformat %}
+{% load blog_tags %}
+{% block title %}post detail{% endblock %}
+{% block content %}
+    <h1 class="post-detail">{{ post.title }}</h1>
+    <p class="author">author:<a href="{% url 'blog:account_detail' account.id %}">{{ post.author }}</a></p>
+    <span class="pub-date">{{ post.publish|jformat:"%Y/%m/%d-%H:%M" }}</span>
+    <div>
+        {% for img in post.images.all %}
+            <img src="{{ img.image_file.url }}" alt="{{ img.title }}" width="300px" height="300px">
+        {% endfor %}
+    </div>
+    <div class="des">
+        <p class="des-p">{{ post.description|markdown|censor }}</p>
+    </div>
+    <hr>
+    <div>
+        {% with comments.count as cm_count %}
+            {{ cm_count }}comment{{ cm_count|pluralize }}
+        {% endwith %}
+    </div>
+    <div>
+        {% for cm in comments %}
+            {{ cm.body|linebreaks }}
+            <br>
+            {{ cm.name }}
+        {% empty %}
+            کامنتی وجود ندارد!
+        {% endfor %}
+    </div>
+    <form method="post" action="{% url 'blog:post_comment' post.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="افزودن کامنت">
+    </form>
+{% endblock %}
